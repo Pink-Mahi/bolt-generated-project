@@ -10,9 +10,36 @@
   <div id="app">
     <div id="auth" class="container">
       <h1>Devices Dashboard</h1>
-      <div id="auth-buttons">
-        <button onclick="signInWithGoogle()">Sign in with Google</button>
-        <button onclick="signInWithApple()">Sign in with Apple</button>
+      
+      <div class="auth-container">
+        <div class="auth-tabs">
+          <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+          <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="login-form" class="auth-form">
+          <input type="email" id="login-email" placeholder="Email">
+          <input type="password" id="login-password" placeholder="Password">
+          <button onclick="loginWithEmail()">Login</button>
+          <div id="login-error" class="error-message"></div>
+        </div>
+
+        <div id="signup-form" class="auth-form hidden">
+          <input type="text" id="signup-username" placeholder="Username">
+          <input type="email" id="signup-email" placeholder="Email">
+          <input type="password" id="signup-password" placeholder="Password">
+          <button onclick="signupWithEmail()">Sign Up</button>
+          <div id="signup-error" class="error-message"></div>
+        </div>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <div id="auth-buttons">
+          <button onclick="signInWithGoogle()" class="oauth-btn google">Sign in with Google</button>
+          <button onclick="signInWithApple()" class="oauth-btn apple">Sign in with Apple</button>
+        </div>
       </div>
     </div>
 
