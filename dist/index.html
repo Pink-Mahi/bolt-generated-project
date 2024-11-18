@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devices Dashboard</title>
+  <script type="module" crossorigin src="/assets/index-BRMewowZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CSEL7n7i.css">
+</head>
+<body>
+  <div id="app">
+    <div id="auth" class="container">
+      <h1>Devices Dashboard</h1>
+      
+      <div class="auth-container">
+        <div class="auth-tabs">
+          <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+          <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="login-form" class="auth-form">
+          <input type="email" id="login-email" placeholder="Email">
+          <input type="password" id="login-password" placeholder="Password">
+          <button onclick="loginWithEmail()">Login</button>
+          <div id="login-error" class="error-message"></div>
+        </div>
+
+        <div id="signup-form" class="auth-form hidden">
+          <input type="text" id="signup-username" placeholder="Username">
+          <input type="email" id="signup-email" placeholder="Email">
+          <input type="password" id="signup-password" placeholder="Password">
+          <button onclick="signupWithEmail()">Sign Up</button>
+          <div id="signup-error" class="error-message"></div>
+        </div>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <div id="auth-buttons">
+          <button onclick="signInWithGoogle()" class="oauth-btn google">Sign in with Google</button>
+          <button onclick="signInWithApple()" class="oauth-btn apple">Sign in with Apple</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="dashboard" class="container hidden">
+      <div class="header">
+        <h1>Devices Dashboard</h1>
+        <button onclick="signOut()" class="sign-out">Sign Out</button>
+      </div>
+
+      <div class="controls">
+        <div class="search">
+          <input type="text" id="device-search" placeholder="Search by device ID">
+          <button onclick="searchDevice()">Search</button>
+        </div>
+        
+        <div class="date-filter">
+          <input type="datetime-local" id="date-filter">
+          <button onclick="filterByDate()">Filter</button>
+        </div>
+      </div>
+
+      <div id="devices-list"></div>
+    </div>
+  </div>
+</body>
+</html>
