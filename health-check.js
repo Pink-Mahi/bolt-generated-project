@@ -2,7 +2,7 @@ import http from 'http';
 
 const options = {
   host: 'localhost',
-  port: process.env.PORT || 8080,
+  port: process.env.PORT || 3000,
   timeout: 2000,
   path: '/'
 };
