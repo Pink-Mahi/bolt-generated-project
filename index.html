@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devices Dashboard</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="auth" class="container">
+      <h1>Devices Dashboard</h1>
+      <div id="auth-buttons">
+        <button onclick="signInWithGoogle()">Sign in with Google</button>
+        <button onclick="signInWithApple()">Sign in with Apple</button>
+      </div>
+    </div>
+
+    <div id="dashboard" class="container hidden">
+      <div class="header">
+        <h1>Devices Dashboard</h1>
+        <button onclick="signOut()" class="sign-out">Sign Out</button>
+      </div>
+
+      <div class="controls">
+        <div class="search">
+          <input type="text" id="device-search" placeholder="Search by device ID">
+          <button onclick="searchDevice()">Search</button>
+        </div>
+        
+        <div class="date-filter">
+          <input type="datetime-local" id="date-filter">
+          <button onclick="filterByDate()">Filter</button>
+        </div>
+      </div>
+
+      <div id="devices-list"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
