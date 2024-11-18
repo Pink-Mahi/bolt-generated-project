@@ -12,6 +12,13 @@ console.log('Supabase Key available:', !!supabaseKey);
 console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
 console.log('Supabase Anon Key:', import.meta.env.VITE_SUPABASE_ANON_KEY);
 
+// Check if environment variables are missing
+if (!supabaseUrl || !supabaseKey) {
+  console.error('Supabase environment variables are missing.');
+  document.body.innerHTML = '<h1>Critical Error: Supabase not configured. Please check your environment variables.</h1>';
+  throw new Error('Supabase environment variables are missing.'); // Stop further execution
+}
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -80,21 +87,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.loginWithEmail = async () => {
+    console.log('Attempting login with email...');
     const email = document.getElementById('login-email')?.value.trim();
     const password = document.getElementById('login-password')?.value.trim();
-    if (!email || !password) {
-      console.error('Email or password missing');
-      displayError('Email and password are required');
-      return;
-    }
-    console.log('Attempting to login with email:', email);
+  
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
       if (error) throw error;
       console.log('Login successful');
     } catch (error) {
       console.error('Login error:', error);
-      displayError('Login failed. Please check your credentials.');
+      displayError('Login failed: ' + (error.message || 'Unknown error'));
     }
   };
 
@@ -170,12 +176,15 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('');
   }
 
-  function displayError(message) {
-    const devicesListElement = document.getElementById('devices-list');
-    if (devicesListElement) {
-      devicesListElement.innerHTML = `<div class="error-message">${message}</div>`;
+  function displayError(message, elementId = 'devices-list') {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.innerHTML = `<div class="error-message">${message}</div>`;
+    } else {
+      console.error(`Element with ID ${elementId} not found. Error message: ${message}`);
     }
   }
+  
 
   window.searchDevice = () => {
     console.log('Searching device...');
